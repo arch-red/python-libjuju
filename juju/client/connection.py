@@ -154,7 +154,7 @@ class Connection:
         kw['ssl'] = self._get_ssl(self.cacert)
         kw['loop'] = self.loop
         self.addr = url
-        self.ws = await websockets.connect(url, **kw)
+        self.ws = await websockets.connect(url, max_size=None, **kw)
         self.loop.create_task(self.receiver())
         self.monitor.receiver_stopped.clear()
         log.info("Driver connected to juju %s", url)
